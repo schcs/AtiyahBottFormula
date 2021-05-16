@@ -38,8 +38,10 @@ function AtiyahBottFormulaForGraph( g::SimpleGraph, pruf_str::String,
         from_file, file_name = exists_file_with_colorings( pruf_str, n )
 
         if from_file 
+            println( "ffile found" )
             cols = graph_coloring_from_file( file_name )        
         else 
+            println( "ffile not found" )
             cols = graph_coloring( g, UInt8(n+1) )
         end 
     else 
