@@ -78,14 +78,14 @@ function AtiyahBottFormulaForGraph( g::SimpleGraph, pruf_str::String,
             end
         end
         
-#        if progress_data.progress.enabled
+        if progress_data.progress.enabled
             progress_data.current_graph += progress_data.top_aut÷aut   
             #upgrade the progress bar
             update!(progress_data.progress_bar, 
                     progress_data.current_graph,
                     showvalues = [(:"Total number of graphs",progress_data.threshold),
                     (:"Current graph",progress_data.current_graph)])
-#        end
+        end
     end
     return result
 end 
