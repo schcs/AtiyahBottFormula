@@ -78,7 +78,7 @@ function AtiyahBottFormulaForGraph( g::SimpleGraph, pruf_str::String,
             end
         end
         
-        if progress_data.progress.enabled
+        if progress_data.progress_bar.enabled
             progress_data.current_graph += progress_data.top_aut÷aut   
             #upgrade the progress bar
             update!(progress_data.progress_bar, 
