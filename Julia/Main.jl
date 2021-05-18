@@ -1,8 +1,12 @@
+module AtiyahBottModule
+
 include("GraphFunctions.jl")
 include("EquivariantClasses.jl")
 
 using LightGraphs
 using ProgressMeter
+
+export AtiyahBottFormula, AtiyahBottFormulaForGraph, check_Data, Hypersurface
 
 number_trees = [1, 1, 2, 3, 6, 11, 23, 47, 106, 235, 551, 1301, 3159]
 #the number of non-isomorphic graphs with given number of vertices (starting from 2)
@@ -38,10 +42,8 @@ function AtiyahBottFormulaForGraph( g::SimpleGraph, pruf_str::String,
         from_file, file_name = exists_file_with_colorings( pruf_str, n )
 
         if from_file 
-            println( "ffile found" )
             cols = graph_coloring_from_file( file_name )        
         else 
-            println( "ffile not found" )
             cols = graph_coloring( g, UInt8(n+1) )
         end 
     else 
@@ -185,4 +187,6 @@ function check_Data(data_dir = "..")
     end
     
     return
+end
+
 end
