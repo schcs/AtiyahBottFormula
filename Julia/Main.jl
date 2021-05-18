@@ -1,10 +1,14 @@
-module AtiyahBottModule
+#module AtiyahBott
 
+using ProgressMeter
+using LightGraphs
+using Combinatorics
+
+include( "Marked.jl" )
 include("GraphFunctions.jl")
 include("EquivariantClasses.jl")
 
-using LightGraphs
-using ProgressMeter
+#export AtiyahBottFormula, AtiyahBottFormulaForGraph
 
 export AtiyahBottFormula, AtiyahBottFormulaForGraph, check_Data, Hypersurface
 
@@ -188,5 +192,4 @@ function check_Data(data_dir = "..")
     
     return
 end
-
-end
+#end

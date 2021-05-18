@@ -1,5 +1,3 @@
-using LightGraphs
-
 """
 The structure `marks` define the marked vertex of a graph.
 # Arguments

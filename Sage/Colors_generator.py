@@ -1,3 +1,4 @@
+load( "graph_colors.py" )
 from sympy.combinatorics.prufer import Prufer 
 from sage.misc.search import search 
 
@@ -8,14 +9,17 @@ def generate( n , min_deg, max_deg):
 
     for v in range((min_deg+1),(max_deg+2)):
         tr = graphs.trees(v)
-        counter = 1
         for t in tr:
             #compute prufer sequence
             pr = [ letters[x] for x in 
                     Prufer( t.edges( labels = false )).prufer_repr ]
             filename = "../Data/Dimension"+str(n)+"/"+"".join(pr)+"0.clr"
             write_graph_colorings( t, n+1, filename )
+<<<<<<< HEAD
             counter += 1
+=======
+
+>>>>>>> aebed4905f6d8ca8a16854193e8912206ebf90bc
 
 def colorings_up_to_isomorphism( gr, num_col ):
 

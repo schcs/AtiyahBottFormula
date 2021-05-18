@@ -1,6 +1,3 @@
-using LightGraphs
-include("Marked.jl")
-
 """
 Equivariant class of curves meeting a linear subspace of codimension r.
 # Arguments
