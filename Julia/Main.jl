@@ -1,8 +1,14 @@
+#module AtiyahBott
+
+using ProgressMeter
+using LightGraphs
+using Combinatorics
+
+include( "Marked.jl" )
 include("GraphFunctions.jl")
 include("EquivariantClasses.jl")
 
-using LightGraphs
-using ProgressMeter
+#export AtiyahBottFormula, AtiyahBottFormulaForGraph
 
 number_trees = [1, 1, 2, 3, 6, 11, 23, 47, 106, 235, 551, 1301, 3159]
 #the number of non-isomorphic graphs with given number of vertices (starting from 2)
@@ -184,3 +190,4 @@ function check_Data(data_dir = "..")
     
     return
 end
+#end
