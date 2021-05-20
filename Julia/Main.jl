@@ -10,8 +10,6 @@ include("EquivariantClasses.jl")
 
 #export AtiyahBottFormula, AtiyahBottFormulaForGraph
 
-export AtiyahBottFormula, AtiyahBottFormulaForGraph, check_Data, Hypersurface
-
 number_trees = [1, 1, 2, 3, 6, 11, 23, 47, 106, 235, 551, 1301, 3159]
 #the number of non-isomorphic graphs with given number of vertices (starting from 2)
 
@@ -84,15 +82,16 @@ function AtiyahBottFormulaForGraph( g::SimpleGraph, pruf_str::String,
                     end
                 end
             end
-        end
-        
-        if progress_data.progress_bar.enabled
-            progress_data.current_graph += progress_data.top_aut÷aut   
-            #upgrade the progress bar
-            update!(progress_data.progress_bar, 
-                    progress_data.current_graph,
-                    showvalues = [(:"Total number of graphs",progress_data.threshold),
-                    (:"Current graph",progress_data.current_graph)])
+
+            if progress_data.progress_bar.enabled
+            
+                progress_data.current_graph += progress_data.top_aut÷aut   
+                #upgrade the progress bar
+                update!(progress_data.progress_bar, 
+                        progress_data.current_graph,
+                        showvalues = [(:"Total number of graphs",progress_data.threshold),
+                        (:"Current graph",progress_data.current_graph)])
+            end
         end
     end
     return result
@@ -116,7 +115,9 @@ function AtiyahBottFormula( n::Int64, deg::Int64, n_marks::Int64, P;
                                         for i in 1:max_col] 
 
     #set up progress data                                    
-    threshold = sum([number_trees[v-1]*max_col*(n^(v-1)) for v in 2:deg+1])
+    threshold::Int64 = sum([number_trees[v-1]*max_col*(n^(v-1))*(v^n_marks) 
+                for v in 2:deg+1])
+
 
     progress_data = ProgressData( 
         Progress(threshold, barglyphs=BarGlyphs("[=> ]"), color=:green), #progress_bar

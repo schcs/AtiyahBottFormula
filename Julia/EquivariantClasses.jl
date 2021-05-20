@@ -1,18 +1,21 @@
+using LightGraphs
+include("Marked.jl")
+
 """
-Equivariant class of curves meeting a linear subspace of codimension r.
+Equivariant class of the cycle parameterizing curves meeting a linear subspace of codimension r.
 # Arguments
 - `g::SimpleGraph`: the graph.
 - `c::Vector{UInt8}`: the coloration.
 - `w::Vector{Int64}`: the weights.
 - `s::Rational{BigInt}`: the scalars.
-- `r::Int64`: the codimension of the subvariety. It can be either a number or a vector.
+- `r::Int64`: the codimension of the subvariety. Alternatively, it can be an array of integers, meaning the multiplication of the equivariant class defined by each element of the array.
 """
 function Incidency(g::SimpleGraph, coloration::Vector{UInt8}, weights::Vector{Int64}, scalars::Vector{Rational{BigInt}}, r::Int64)::Rational{BigInt}
     
-    local p1 = Rational{BigInt}(0);
-    r -= 1
+    local p1 = Rational{BigInt}(0); #the final result
+    r -= 1                          
     
-    col = Dict(vertices(g).=> coloration) #assing colors to vertices
+    col = Dict(vertices(g).=> coloration) #assign colors to vertices
     d = Dict(edges(g).=> weights) #assign weights to edges
 
     for e in edges(g)
@@ -38,24 +41,24 @@ end
 
 
 """
-Equivariant class of curves contained in a hypersurface of degree b.
+Equivariant class of the Euler class of the bundle equal to the direct image under the forgetful map of ev^*O(b). It parameterizes curves contained in a hypersurface of degree b.
 # Arguments
 - `g::SimpleGraph`: the graph.
 - `c::Vector{UInt8}`: the coloration.
 - `w::Vector{Int64}`: the weights.
 - `s::Rational{BigInt}`: the scalars.
-- `b::Int64`: the degrees of the hypersurface. It can be either a number or a vector.
+- `b::Int64`: the degrees of the hypersurface. Alternatively, it can be an array of integers, meaning the multiplication of the equivariant class defined by each element of the array.
 """
 function Hypersurface(g::SimpleGraph, coloration::Vector{UInt8}, weights::Vector{Int64}, scalars::Vector{Rational{BigInt}}, b::Int64)::Rational{BigInt}
 
-    local p1=Rational{BigInt}(1)
-    local q1=Rational{BigInt}(1)
+    local p1 = Rational{BigInt}(1)
+    local q1 = Rational{BigInt}(1)
     
-    col = Dict(vertices(g).=> coloration) #assing colors to vertices
+    col = Dict(vertices(g).=> coloration) #assign colors to vertices
     d = Dict(edges(g).=> weights) #assign weights to edges
     
     for e in edges(g)
-        for alph in (0:b*d[e])
+        for alph in 0:(b*d[e])
             p1 *= (alph*scalars[col[src(e)]]+(b*d[e]-alph)*scalars[col[dst(e)]])//d[e]
         end
     end
@@ -80,7 +83,7 @@ end
 
 
 """
-Equivariant class of contact curves.
+Equivariant class of the Euler class of the bundle equal to the direct image under the forgetful map of: ev^*O(2) tensor the dualizing sheaf of the forgetful map. It parameterizes contact curves in an odd dimensional projective space.
 # Arguments
 - `g::SimpleGraph`: the graph.
 - `c::Vector{UInt8}`: the coloration.
@@ -92,7 +95,7 @@ function Contact(g::SimpleGraph, coloration::Vector{UInt8}, weights::Vector{Int6
     local p1 = Rational{BigInt}(1)
     local q1 = Rational{BigInt}(1)
     
-    col = Dict(vertices(g).=> coloration) #assing colors to vertices
+    col = Dict(vertices(g).=> coloration) #assign colors to vertices
     d = Dict(edges(g).=> weights) #assign weights to edges
     
     for e in edges(g)
@@ -149,9 +152,39 @@ function O1(g::SimpleGraph, coloration::Vector{UInt8}, weights::Vector{Int64}, s
     return p1
 end
 
+"""
+The equivariant class of derived functor ??? the obstraction bundle R^1
+# Arguments
+- `g::SimpleGraph`: the graph.
+- `c::Vector{UInt8}`: the coloration.
+- `w::Vector{Int64}`: the weights.
+- `s::Rational{BigInt}`: the scalars.
+- `k::Int64`: 
+"""
+function R1(g::SimpleGraph, coloration::Vector{UInt8}, weights::Vector{Int64}, scalars::Vector{Rational{BigInt}}, k::Int64)::Rational{BigInt}
+    
+    local p1 = Rational{BigInt}(1)
+    local q1 = Rational{BigInt}(1)
+    
+    col = Dict(vertices(g).=> coloration) #assign colors to vertices
+    d = Dict(edges(g).=> weights) #assign weights to edges
+    
+    for e in edges(g)
+        for alph in 1:(k*d[e]-1)
+            p1 *= (-1)*(alph*scalars[col[src(e)]]+(k*d[e]-alph)*scalars[col[dst(e)]])//d[e]
+        end
+    end
+    
+    for v in vertices(g)
+        q1 *= (k*scalars[col[v]])^(length(all_neighbors(g, v))-1)   
+    end
+
+    return p1*q1
+
+end
 
 """
-The inverse of the equivariant class of the Euler class of the normal bundle.
+The inverse of the (equivariant) Euler class of the normal bundle.
 # Arguments
 - `g::SimpleGraph`: the graph.
 - `c::Vector{UInt8}`: the coloration.
@@ -175,10 +208,10 @@ function Euler_inv(g::SimpleGraph, coloration::Vector{UInt8}, weights::Vector{In
     
     for e in edges(g)
         q1 = one(Rational{BigInt})
-        for var_col in 1:max_col
-            if var_col != col[src(e)] && var_col != col[dst(e)]
+        for j in 1:max_col
+            if j != col[src(e)] && j != col[dst(e)]
                     for alph in 0:d[e]
-                        q1 *= ((alph*scalars[col[src(e)]]+(d[e]-alph)*scalars[col[dst(e)]])*(1//d[e])-scalars[var_col])
+                        q1 *= ((alph*scalars[col[src(e)]]+(d[e]-alph)*scalars[col[dst(e)]])*(1//d[e])-scalars[j])
                     end
             end
         end
