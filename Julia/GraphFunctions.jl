@@ -1,6 +1,3 @@
-using LightGraphs
-using Combinatorics
-
 """
 The structure `graph_coloring` define the colorations of a graph.
 # Arguments
