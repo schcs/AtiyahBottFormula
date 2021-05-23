@@ -46,6 +46,7 @@ function AtiyahBottFormulaForGraph( g::SimpleGraph, pruf_str::String,
         if from_file 
             cols = graph_coloring_from_file( file_name )        
         else 
+            println( "graph not found!!!" )
             cols = graph_coloring( g, UInt8(n+1) )
         end 
     else 
