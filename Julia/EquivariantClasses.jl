@@ -153,13 +153,13 @@ function O1(g::SimpleGraph, coloration::Vector{UInt8}, weights::Vector{Int64}, s
 end
 
 """
-The equivariant class of derived functor ??? the obstraction bundle R^1
+The equivariant class of the first derived functor of the pull-back of O(-k).
 # Arguments
 - `g::SimpleGraph`: the graph.
 - `c::Vector{UInt8}`: the coloration.
 - `w::Vector{Int64}`: the weights.
 - `s::Rational{BigInt}`: the scalars.
-- `k::Int64`: 
+- `k::Int64`: a positive integer.
 """
 function R1(g::SimpleGraph, coloration::Vector{UInt8}, weights::Vector{Int64}, scalars::Vector{Rational{BigInt}}, k::Int64)::Rational{BigInt}
     
@@ -176,7 +176,7 @@ function R1(g::SimpleGraph, coloration::Vector{UInt8}, weights::Vector{Int64}, s
     end
     
     for v in vertices(g)
-        q1 *= (k*scalars[col[v]])^(length(all_neighbors(g, v))-1)   
+        q1 *= (-k*scalars[col[v]])^(length(all_neighbors(g, v))-1)   
     end
 
     return p1*q1
