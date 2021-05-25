@@ -7,6 +7,13 @@ Run Julia on your computer from the Julia directory of the package. Once the Jul
 
 julia> include( "Main.jl" )
 
+Our package depends on the avaialability of the following <a href="https://docs.julialang.org/en/v1/stdlib/Pkg/">Julia packages</a>:
+-- ProgressMeter
+-- LightGraphs
+-- Combinatorics.
+
+Make sure that they are available on your computer.
+
 You can check your current working directory inside Julia by typing 
 
 julia> pwd() 
@@ -44,5 +51,6 @@ The number of Degree d plane curves passing through 3d-1 points:
 julia> P = (g,c,w,s,m) -> Incidency(g,c,w,s,2)^(3d-1)<br>
 julia> AtiyahBottFormula(2,d,0,P);<br>
 
-
-
+In order to execute these computations, the system requires the list of tree graphs up to d+1 vertices. These graphs are available in the file list_trees.txt. 
+We also need the possible colorings of these graphs with n+1 colors. These can either be computed by the package or they can be read from a file stored 
+in the Data directory (this is the fastest option). The user can use function check_Data() to see the list of graphs with pre-computed colorings. 
