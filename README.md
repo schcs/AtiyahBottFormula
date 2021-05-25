@@ -15,13 +15,13 @@ Our package depends on the avaialability of the following <a href="https://docs.
 Make sure that they are available on your computer. These packages can be installed by typing 
 
 julia> using Pkg;<br>
-julia> Pkg.add.(["ProgressMeter","Combinatorics",LightGraphs"])
+julia> Pkg.add.(["ProgressMeter","Combinatorics","LightGraphs"])
 
 You can check your current working directory inside Julia by typing 
 
 julia> pwd() 
 
-To use our code, the you should first define the equivariant classes to be calculated as "P = (g,c,w,s,m) ->...".
+To use our code, you should first define the equivariant classes to be calculated as "P = (g,c,w,s,m) ->...".
 After the "->", one has to write an expression in the equivariant classes. After P is defined, one has to call the
 Atiyah-Bott formula by the command AtiyahBottFormula(n,d,m,P). 
 
