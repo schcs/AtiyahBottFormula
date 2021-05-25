@@ -7,7 +7,7 @@ Run Julia on your computer from the Julia directory of the package. Once the Jul
 
 julia> include( "Main.jl" )
 
-Our package depends on the avaialability of the following <a href="https://docs.julialang.org/en/v1/stdlib/Pkg/">Julia packages</a>:<br>
+Our package depends on the availability of the following <a href="https://docs.julialang.org/en/v1/stdlib/Pkg/">Julia packages</a>:<br>
 -- ProgressMeter<br>
 -- LightGraphs<br>
 -- Combinatorics.<br>
