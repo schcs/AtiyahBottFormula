@@ -56,7 +56,7 @@ julia> AtiyahBottFormula(5,d,0,P);<br>
 The number of rational degree d curves on a cubic surface passing through d-1 points:
 
 julia> d = 1 #for other values of d, change this line<br>
-julia> P = (g,c,w,s,m) -> Hypersurface(g,c,w,s,3)*(Incidency(g,c,w,s,2)/3)^(d-1)<br>
+julia> P = (g,c,w,s,m) -> Hypersurface(g,c,w,s,3)*(Incidency(g,c,w,s,2)//3)^(d-1)<br>
 julia> AtiyahBottFormula(3,d,0,P);<br>
 
 
