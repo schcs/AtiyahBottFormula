@@ -17,7 +17,7 @@ Atiyah-Bott formula by the command AtiyahBottFormula(n,d,m,P).
 
 The full list of the currently supported equivariant classes is the following:
 
-O1_i(g,c,w,s,m,i)
+O1_i(g,c,w,s,m,i)<br>
 O1(g,c,w,s,m)
 Incidency(g,c,w,s,r)
 Hypersurface(g,c,w,s,b)
