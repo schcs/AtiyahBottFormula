@@ -44,3 +44,5 @@ The number of Degree d plane curves passing through 3d-1 points:
 julia> P = (g,c,w,s,m) -> Incidency(g,c,w,s,2)^(3d-1)<br>
 julia> AtiyahBottFormula(2,d,0,P);<br>
 
+
+
