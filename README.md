@@ -18,26 +18,29 @@ Atiyah-Bott formula by the command AtiyahBottFormula(n,d,m,P).
 The full list of the currently supported equivariant classes is the following:
 
 O1_i(g,c,w,s,m,i)<br>
-O1(g,c,w,s,m)
-Incidency(g,c,w,s,r)
-Hypersurface(g,c,w,s,b)
-Contact(g,c,w,s)
-R1(g,c,w,s)
+O1(g,c,w,s,m)<br>
+Incidency(g,c,w,s,r)<br>
+Hypersurface(g,c,w,s,b)<br>
+Contact(g,c,w,s)<br>
+R1(g,c,w,s)<br>
 
 Brief descriptions on these functions can be obtained through the standard help functionality of Julia by typing "?" and then the name of the function.
 
 For example, to compute the number of rational plane curves of degree d through 3d−1 general points, one may write
 
-julia> d = 1 #for other values of d, change this line
-julia> P = (g,c,w,s,m) -> O1(g,c,w,s,m)^2
-julia> AtiyahBottFormula(2,d,3*d-1,P);
+julia> d = 1 #for other values of d, change this line<br>
+julia> P = (g,c,w,s,m) -> O1(g,c,w,s,m)^2<br>
+julia> AtiyahBottFormula(2,d,3*d-1,P);<br>
 
 
 The number of degree d curves on a cubic surface passing through d-1 points:
-julia> P = (g,c,w,s,m) -> Hypersurface(g,c,w,s,3)*(Incidency(g,c,w,s,2)/3)^(d-1)
-julia> AtiyahBottFormula(3,d,0,P);
+
+julia> d = 2<br>
+julia> P = (g,c,w,s,m) -> Hypersurface(g,c,w,s,3)*(Incidency(g,c,w,s,2)/3)^(d-1)<br>
+julia> AtiyahBottFormula(3,d,0,P);<br>
 
 The number of Degree d plane curves passing through 3d-1 points:
-julia> P = (g,c,w,s,m) -> Incidency(g,c,w,s,2)^(3d-1)
-julia> AtiyahBottFormula(2,d,0,P);
+
+julia> P = (g,c,w,s,m) -> Incidency(g,c,w,s,2)^(3d-1)<br>
+julia> AtiyahBottFormula(2,d,0,P);<br>
 
