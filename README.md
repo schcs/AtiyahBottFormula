@@ -7,12 +7,15 @@ Run Julia on your computer from the Julia directory of the package. Once the Jul
 
 julia> include( "Main.jl" )
 
-Our package depends on the avaialability of the following <a href="https://docs.julialang.org/en/v1/stdlib/Pkg/">Julia packages</a>:
--- ProgressMeter
--- LightGraphs
--- Combinatorics.
+Our package depends on the avaialability of the following <a href="https://docs.julialang.org/en/v1/stdlib/Pkg/">Julia packages</a>:<br>
+-- ProgressMeter<br>
+-- LightGraphs<br>
+-- Combinatorics.<br>
 
-Make sure that they are available on your computer.
+Make sure that they are available on your computer. These packages can be installed by typing 
+
+julia> using Pkg;<br>
+julia> Pkg.add.(["ProgressMeter","Combinatorics",LightGraphs"])
 
 You can check your current working directory inside Julia by typing 
 
