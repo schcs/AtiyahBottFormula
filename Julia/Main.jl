@@ -41,20 +41,15 @@ function AtiyahBottFormulaForGraph( g::SimpleGraph, pruf_str::String,
     local result::Vector{Rational{BigInt}} = [Rational{BigInt}(0) for _ in 1:n_results] #the array of final results
     
     
-    try_to_find_color_file = true #IS THIS USEFUL???
-    if try_to_find_color_file   #we always try to read the colorations from the a file where they are unique modulo isomorphisms
-        from_file, file_name = exists_file_with_colorings( pruf_str, n )
+    from_file, file_name = exists_file_with_colorings( pruf_str, n )
 
-        if from_file 
-            cols = graph_coloring_from_file( file_name )        
-        else 
-            #println( "graph not found!!!" )
-            cols = graph_coloring( g, UInt8(n+1) )
-        end 
+    if from_file 
+        cols = graph_coloring_from_file( file_name )        
     else 
+        #println( "graph not found!!!" )
         cols = graph_coloring( g, UInt8(n+1) )
-        from_file = false
-    end
+    end 
+
 
     for c in cols   #we run among all colorations of g
         if from_file 
@@ -104,7 +99,6 @@ Apply the Atiyah-Bott residue formula to the class `P`, in the moduli space of r
 - `P`: the equivariant class.
 - `do_check::Bool`: if `true`, checks if `P` is a well defined zero cycle, and stops the computation if this is not true. If `false`, the computation may have an unexpected behaviour. By default is `true`.
 - `show_bar::Bool`: hide the progress bar if and only if this condition is `false`. By default is `true`.
-- `try_to_find_color_file::Bool`: if `true` will read the coloration from the folder Data. If `false` or the file are not present, it will generate the colorations internally. By default is `true`. 
 
 The general construction of `P` is the following:
 ```jldoctest
@@ -162,7 +156,6 @@ More examples are available in the support of the equivariant classes. It is eno
 """
 function AtiyahBottFormula(n::Int64, deg::Int64, n_marks::Int64, P, do_check::Bool = true, show_bar::Bool = true)::Vector{Rational{BigInt}}
     
-    try_to_find_color_file::Bool = true
     if n < 1 || deg < 1
         printstyled("ERROR: ", bold=true, color=:red)
         println("n and d must be positive, correct ", n, " or ", deg)
