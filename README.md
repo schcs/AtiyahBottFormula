@@ -40,34 +40,34 @@ Jet(g,c,w,s,m,p,q)      (Euler class of the jet bundle J^p)<br>
 Brief descriptions on these functions can be obtained through the standard help functionality of Julia by typing "?" and then the name of the function.
 
 For example, to compute the number of rational plane curves of degree d through 3d−1 general points, one may write
-
+<pre class="tab">
 julia> d = 1 #for other values of d, change this line<br>
 julia> P = (g,c,w,s,m) -> O1(g,c,w,s,m)^2<br>
 julia> AtiyahBottFormula(2,d,3*d-1,P);<br>
-
+</pre>
 Alternatively, one can perform such computation with zero marked points by typing
-
+<pre class="tab">
 julia> P = (g,c,w,s,m) -> Incidency(g,c,w,s,2)^(3*d-1)<br>
 julia> AtiyahBottFormula(2,d,0,P);<br>
-
+</pre>
 The virtual number of rational degree d curves on a general complete intersection of type (2,3) in the projective space of dimension 5:
-
+<pre class="tab">
 julia> d = 1 #for other values of d, change this line<br>
 julia> P = (g,c,w,s,m) -> Hypersurface(g,c,w,s,[2,3])<br>
 julia> AtiyahBottFormula(5,d,0,P);<br>
-
+</pre>
 The number of rational degree d curves on a cubic surface passing through d-1 points:
-
+<pre class="tab">
 julia> d = 1 #for other values of d, change this line<br>
 julia> P = (g,c,w,s,m) -> Hypersurface(g,c,w,s,3)*(Incidency(g,c,w,s,2)//3)^(d-1)<br>
 julia> AtiyahBottFormula(3,d,0,P);<br>
-
+</pre>
 The number plane rational degree d curves through 3d-2 points and tangent to a line:
-
+<pre class="tab">
 julia> d = 1 #for other values of d, change this line<br>
 julia> P = (g,c,w,s,m) -> Incidency(g,c,w,s,2)^(3*d-1)*Jet(g,c,w,s,m,1,1);<br>
 julia> AtiyahBottFormula(2,d,1,P);<br>
-
+</pre>
 
 In order to execute these computations, the system requires the list of tree graphs up to d+1 vertices. These graphs are available in the file list_trees.txt. 
 We also need the possible colorings of these graphs with n+1 colors. These can either be computed by the package or they can be read from a file stored 
