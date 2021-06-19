@@ -27,14 +27,14 @@ Atiyah-Bott formula by the command AtiyahBottFormula(n,d,m,P).
 
 The full list of the currently supported equivariant classes is the following:
 
-O1_i(g,c,w,s,m,i) (pull back of the line bundle O(1) of the projective space)<br>
-O1(g,c,w,s,m) (product of all O1_i)<br>
-Incidency(g,c,w,s,r) (class of curves meeting a linear subspace)<br>
+O1_i(g,c,w,s,m,i)       (pull back of the line bundle O(1) of the projective space)<br>
+O1(g,c,w,s,m)           (product of all O1_i)<br>
+Incidency(g,c,w,s,r)    (class of curves meeting a linear subspace)<br>
 Hypersurface(g,c,w,s,b) (class of curves contained in a hypersurface)<br>
-Contact(g,c,w,s) (class of contact curves)<br>
-R1(g,c,w,s,k) (first derived functor of direct image of the pull back of O(-k))<br>
-Ps1(g,c,w,s,m,a) (cycle of psi-classes) <br> 
-Jet(g,c,w,s,m,p,q) (Euler class of the jet bundle J^p)<br>
+Contact(g,c,w,s)        (class of contact curves)<br>
+R1(g,c,w,s,k)           (first derived functor of direct image of the pull back of O(-k))<br>
+Psi(g,c,w,s,m,a)        (cycle of psi-classes) <br> 
+Jet(g,c,w,s,m,p,q)      (Euler class of the jet bundle J^p)<br>
 
 Brief descriptions on these functions can be obtained through the standard help functionality of Julia by typing "?" and then the name of the function.
 
