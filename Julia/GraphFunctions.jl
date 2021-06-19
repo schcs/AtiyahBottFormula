@@ -11,6 +11,10 @@ mutable struct graph_coloring
     current_color::Array{UInt8,1}
 end
 
+Read = Dict("1"=>1,"2"=>2,"3"=>3,"4"=>4,"5"=>5,"6"=>6,"7"=>7,"8"=>8,"9"=>9,"a"=>10,           
+            "b"=>11,"c"=>12,"d"=>13,"e"=>14,"f"=>15,"g"=>16,"h"=>17,"i"=>18,"j"=>19,"k"=>20,
+            "l"=>21,"m"=>22,"n"=>23,"o"=>24,"p"=>25,"q"=>26,"r"=>27,"s"=>28,"t"=>29,"u"=>30)
+
 function graph_coloring( G::SimpleGraph, num_cols::UInt8 )
     return graph_coloring( G, num_cols, [] )
 end
@@ -34,9 +38,10 @@ function Base.iterate( GC::graph_coloring_from_file, c=0 )
         close( GC.color_file )
         return nothing
     end 
-
+    
     st = split( st, "," )
-    GC.current_color = [ parse( UInt8, x ) for x in split( st[1], "" )]
+    #GC.current_color = [ parse( UInt8, Read[x] ) for x in split( st[1], "" )]
+    GC.current_color = [ UInt8(Read[x]) for x in split( st[1], "" )]
     GC.current_aut = parse( Int64, st[2] )
     return GC.current_color, 0
 end
@@ -157,37 +162,13 @@ function PruferToGraph(prufer::Vector{UInt8})::SimpleGraph
     return g
 end
 
-function GraphToPrufer(g::SimpleGraph)::Vector{UInt8}
-    
-    local G = copy(g) #this is not strictly necessary, but it is useful because we are going to modify g
-    local prufer = Vector{UInt8}(undef,(nv(G)-2))
-        i::Int64 = 1
-    #push!(prufer,convert(UInt8, nv(G))) #comment off this if we want that the first element of the sequence is the number of vertices
-    
-    while (nv(G)>2) #when G is a single edge, we stop
-        for v in vertices(G) #we look for the smallest leaf
-            local neighb_v = all_neighbors(G, v)
-            if length(neighb_v) == 1 #if this is true, then we found the leaf with smallest label
-                other_v = neighb_v[1] #the other vertex
-                prufer[i] = convert(UInt8, other_v)
-                i += 1
-                rem_vertex!(G, v) #remove the vertex
-                break #back to while
-            end
-        end
-    end
-    
-    return sort(prufer) #I like to have my sequence sorted
-end
-
-
 """
 Extract a Prufer sequence and a number from a string. The number is the number of automorphisms of the graph with that Prufer sequence.
 """
 function get_graph(str::String)::Tuple{SimpleGraph{Int64}, Int64}
 
     s = split(str, ',')
-    g = PruferToGraph([parse(UInt8,s[1][i]) for i in 1:length(s[1])]) #get the graph
+    g = PruferToGraph(UInt8[ Read[string(s[1][i])] for i in 1:length(s[1])]) #get the graph
     a = parse(Int64,s[2])       
     return (g, a)
 end
