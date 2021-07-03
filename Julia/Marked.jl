@@ -1,5 +1,3 @@
-using LightGraphs
-
 """
 The structure `marks` define the marked vertex of a graph.
 # Arguments
@@ -7,25 +5,15 @@ The structure `marks` define the marked vertex of a graph.
 - `m::Int64`: the number of marks.
 - `get_vertex::Dict{Int64,Int64}`: a dictionary Dict{Int64,Int64} which associate to each mark a vertex.
 """
-#if !@isdefined marks 
-    mutable struct marks
+mutable struct marks
         n_vert::Int64
         m::Int64
         get_vertex::Dict{Int64,Int64}
-    end
-#end
+end
 
-
-# function marks(g::SimpleGraph,m::Int64)::marks
-#     return marks( nv(g), m , Dict{Int64, Int64}() )
-# end
-
-####???????????????????
 function empty_mark()::marks
     return marks( 0, 0 , Dict{Int64, Int64}() )
 end
-# empty_mark = marks( 0, 0 , Dict{Int64, Int64}() )
-####???????????????????
 
 function marks(v::Int64,m::Int64)::marks
     return marks( v, m , Dict{Int64, Int64}() )

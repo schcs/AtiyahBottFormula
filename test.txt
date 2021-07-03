@@ -1,0 +1,20 @@
+include("Main.jl")
+##########
+?Incidency
+#############
+P= (g,c,w,s,m) -> Contact(g,c,w,s)*(Incidency(g,c,w,s,2)^4)*(O1(g,c,w,s,m)^2)
+AtiyahBottFormula(3,2,1,P)
+########
+P= (g,c,w,s,m) -> Hypersurface(g,c,w,s,5)*(O1(g,c,w,s,m))
+AtiyahBottFormula(4,1,1,P)
+########
+P= (g,c,w,s,m) -> Hypersurface(g,c,w,s,5)
+AtiyahBottFormula(4,1,0,P)
+########
+d = 5 #can be any number
+P = Vector{Any}(undef, d+1)
+for a in 0:d
+    P[a+1] = (g,c,w,s,m) -> Contact(g,c,w,s)*Incidency(g,c,w,s,3)^a*Incidency(g,c,w,s,2)^(2*d+1-2*a)
+end
+AtiyahBottFormula(3,d,0,P);
+#########

@@ -1,6 +1,3 @@
-using LightGraphs
-using Combinatorics
-
 """
 The structure `graph_coloring` define the colorations of a graph.
 # Arguments
@@ -8,13 +5,11 @@ The structure `graph_coloring` define the colorations of a graph.
 - `num_cols::UInt8`: the number of colors.
 - `current_color::Array{UInt8,1}`: the array of colors.
 """
-#if !@isdefined graph_coloring 
-    mutable struct graph_coloring
-        graph::SimpleGraph
-        num_cols::UInt8
-        current_color::Array{UInt8,1}
-    end
-#end
+mutable struct graph_coloring
+    graph::SimpleGraph
+    num_cols::UInt8
+    current_color::Array{UInt8,1}
+end
 
 function graph_coloring( G::SimpleGraph, num_cols::UInt8 )
     return graph_coloring( G, num_cols, [] )
@@ -29,7 +24,6 @@ end
 
 function graph_coloring_from_file( file_name::String )
     color_file = open( file_name )
-    readline( color_file )
     return graph_coloring_from_file( file_name, color_file, [], 1 )
 end
 
@@ -47,34 +41,16 @@ function Base.iterate( GC::graph_coloring_from_file, c=0 )
     return GC.current_color, 0
 end
 
-function exists_file_with_colorings( pruf_str0::String, 
+function exists_file_with_colorings( pruf_str::String, 
         dim::Int64; data_dir = "../Data/" )
 
     dir = data_dir*"Dimension"*string( dim )*"/"
 
-    if isdir( dir )
-        files = [ x for x in readdir( dir ) if !isdir( dir*x )]
-    else 
+    if isdir( dir ) && pruf_str*"0.clr" in readdir( dir )
+        return true, dir*pruf_str*"0.clr"
+    else
         return false, nothing
     end
-    
-    for f in files
-        ff = open( dir*f )
-        pruf_str = readline( ff )
-
-        if last( pruf_str ) == ',' 
-            pruf_str = pruf_str[1:length(pruf_str)-1]
-        end
-
-
-        if pruf_str == pruf_str0
-            close( ff ) 
-            return true, dir*f
-        end
-        close( ff )
-    end
-
-    return false, nothing        
 end
 
 function is_coloring( G::SimpleGraph, cols::Array{UInt8,1} )
