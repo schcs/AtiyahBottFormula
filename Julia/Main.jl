@@ -4,11 +4,7 @@ using ProgressMeter
 using LightGraphs
 using Combinatorics
 
-<<<<<<< HEAD
-include("Marked.jl")
-=======
 include( "Marked.jl" )
->>>>>>> 7a72e15ec329d7dc7850bea9b1fecf423f43e442
 include("GraphFunctions.jl")
 include("EquivariantClasses.jl")
 include("Checks.jl")
@@ -52,11 +48,7 @@ function AtiyahBottFormulaForGraph( g::SimpleGraph, pruf_str::String,
         if from_file 
             cols = graph_coloring_from_file( file_name )        
         else 
-<<<<<<< HEAD
             #println( "graph not found!!!" )
-=======
-            println( "graph not found!!!" )
->>>>>>> 7a72e15ec329d7dc7850bea9b1fecf423f43e442
             cols = graph_coloring( g, UInt8(n+1) )
         end 
     else 
@@ -89,11 +81,7 @@ function AtiyahBottFormulaForGraph( g::SimpleGraph, pruf_str::String,
             if progress_data.progress_bar.enabled
             
                 progress_data.current_graph += progress_data.top_aut÷aut   
-<<<<<<< HEAD
                 #update the progress bar
-=======
-                #upgrade the progress bar
->>>>>>> 7a72e15ec329d7dc7850bea9b1fecf423f43e442
                 update!(progress_data.progress_bar, 
                         progress_data.current_graph,
                         showvalues = [(:"Total number of graphs",progress_data.threshold),
@@ -242,45 +230,4 @@ function AtiyahBottFormula(n::Int64, deg::Int64, n_marks::Int64, P; do_check::Bo
     end
     return result
 end
-<<<<<<< HEAD
-=======
-
-function check_Data(data_dir = "..")
-    
-    data_dir = data_dir*"/Data/"
-    
-    if !isdir(data_dir)
-        println("Folder ", data_dir, " not found.")
-        return
-    end
-    
-    Dimension_dirs = [x for x in readdir(data_dir) if startswith(x,"Dimension")]
-    
-    if length(Dimension_dirs) == 0
-        println("""Folder "Data" is empty.""")
-        return
-    end
-    
-    println("""Folder "Data" found.""")
-    
-    for current_dir in Dimension_dirs
-        println(current_dir," contains:")
-        files = [x for x in readdir(data_dir*current_dir)]
-        for v in 2:14
-            num = count(x->length(x)==v+3 && endswith(x,".clr"), files)
-            if num == 0
-                println( "No colored graphs with ", v, " vertices.")
-                continue
-            elseif num < number_trees[v-1]
-                println("Some colored graph with ",v," vertices is missing.")
-            else
-                println("All colored graph with ",v," vertices.")
-            end
-            
-        end
-    end
-    
-    return
-end
 #end
->>>>>>> 7a72e15ec329d7dc7850bea9b1fecf423f43e442

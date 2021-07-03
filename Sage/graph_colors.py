@@ -158,7 +158,8 @@ def colorings_up_to_isomorphism( gr, num_col ):
 
 def write_graph_colorings( gr, num_col, fname ):
     letters = [ '1','2','3','4','5','6','7','8','9',
-                    'a','b','c','d','e','f','g','h','i','j','k'];
+                'a','b','c','d','e','f','g','h','i','j','k',
+                'l','m','n','o','p','q','r','s','t','u'];
     
     cols, auts = colorings_up_to_isomorphism( gr, num_col )
     f = open( fname, "w" )
