@@ -1,5 +1,7 @@
 # AtiyahBottFormula
 
+This project is being continued in this repository: https://github.com/mgemath/AtiyahBott.jl/.
+
 This package contains an implementation of the Atiyah-Bott residue formula in the Julia language. The theory behind the package is described in the paper 
 "Effective computations of the Atiyah-Bott formula" by Giosuè Muratore e Csaba Schneider (https://arxiv.org/pdf/2105.11183.pdf).
 
